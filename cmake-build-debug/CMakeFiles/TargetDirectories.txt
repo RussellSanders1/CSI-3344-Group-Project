@@ -1,4 +1,0 @@
-C:/Users/russe/Desktop/Booth 3344/Projects/Group Project/cmake-build-debug/CMakeFiles/SDLTest.dir
-C:/Users/russe/Desktop/Booth 3344/Projects/Group Project/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-C:/Users/russe/Desktop/Booth 3344/Projects/Group Project/cmake-build-debug/CMakeFiles/test.dir
-C:/Users/russe/Desktop/Booth 3344/Projects/Group Project/cmake-build-debug/CMakeFiles/edit_cache.dir
