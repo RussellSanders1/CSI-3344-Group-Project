@@ -1,28 +1,5 @@
 #include "SDL_Plotter.h"
 
-
-static int Sound(void *data){
-	param *p = (param*)data;
-	p->running = true;
-	Mix_Chunk *gScratch = NULL;
-	gScratch = Mix_LoadWAV( p->name.c_str() );
-
-
-	while(p->running){
-		SDL_mutexP( p->mut );
-		  SDL_CondWait(p->cond, p->mut);
-		  Mix_PlayChannel( -1, gScratch, 0 );
-		  p->play = false;
-		SDL_mutexV(p->mut);
-	}
-
-	Mix_FreeChunk( gScratch );
-	p->running = false;
-	return 0;
-}
-
-// SDL Plotter Function Definitions
-
 SDL_Plotter::SDL_Plotter(int r, int c, bool WITH_SOUND){
 	row = r;
 	col = c;

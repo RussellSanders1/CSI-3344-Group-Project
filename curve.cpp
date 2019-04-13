@@ -19,6 +19,7 @@ color_rgb BLACK(0,0,0);
 
 curve::curve(): sameScale(false) {}
 
+
 void curve::display(Data_t data, ostream &out) {
     int b = 0;
     for(auto const &i : data){
@@ -43,7 +44,7 @@ void curve::draw(Data_t data, SDL_Plotter &g) {
     //plot axes and ticks
     this->plotAxis(margin, colEnd, rowEnd, g);
     this->plotTickMarks(margin, colEnd, rowEnd, g);
-    
+
     //draw curves
     vector<line> lineSet;
     line l;
@@ -63,7 +64,7 @@ void curve::draw(Data_t data, SDL_Plotter &g) {
     //set scale factor for the overall graph
     scaleFactorX = (double)(xEnd - originX) / maxX;
     scaleFactorY = (double)(yEnd - originY) / maxY;
-    
+
     //draw each curve
     for(auto curveData : data){
         //set individual scale if !sameScale
@@ -91,7 +92,6 @@ void curve::draw(Data_t data, SDL_Plotter &g) {
         }
         //clear vector of lines and change color
         lineSet.clear();
-        l.nextColor();
     }
 }
 
@@ -113,19 +113,19 @@ void curve::plotTickMarks(int margin, int maxX, int maxY, SDL_Plotter &g) {
     int intervalY = (maxY - 2*minY) / 10;
     int lineLengthX = minX / 10;
     int lineLengthY = minY / 10;
-    
+
     for(int y = minY; y < maxY - minY; y+=intervalY){
         for(int x = minX-lineLengthX; x <= minX+lineLengthX; x++){
             g.plotPixel(x,y, BLACK.getR(),BLACK.getG(),BLACK.getB());
         }
     }
-    
+
     for(int x = maxX - minX; x > minX ; x-= intervalX){
         for(int y = maxY- minY -lineLengthY; y <= maxY - minY+lineLengthY; y++){
             g.plotPixel(x,y, BLACK.getR(),BLACK.getG(),BLACK.getB());
         }
     }
-    
+
 }
 
 bool curve::goodPoints(line a, int margin, SDL_Plotter &g){
@@ -142,3 +142,4 @@ bool curve::goodPoints(line a, int margin, SDL_Plotter &g){
     }
     return flag;
 }
+

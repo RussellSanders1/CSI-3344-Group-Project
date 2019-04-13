@@ -30,10 +30,10 @@ void point::setX(int x){
 void point::setColor(color_rgb c){
     this->color = c;
 }
-int point::getX(){
+int point::getX() const {
     return this->x;
 }
-int point::getY(){
+int point::getY() const {
     return this->y;
 }
 color_rgb point::getColor(){
@@ -45,6 +45,8 @@ point& point::operator=(const point& rhs){
     this->color = rhs.color;
     return *this;
 }
+
+
 void point::display(ostream& out){
     out << this->x << ", " << this->y;
 }
@@ -52,3 +54,19 @@ void point::draw(SDL_Plotter& g){
     g.plotPixel(this->x, this->y, this->color.getR(), this->color.getG(),
                 this->color.getB());
 }
+
+bool point::operator<(const point &rhs) const {
+    bool lessThan = false;
+
+    if (this->getX() < rhs.getX()) {
+        lessThan = true;
+    }
+    else if (this->getX() == rhs.getX()) {
+        if (this->getY() < rhs.getY()) {
+            lessThan = true;
+        }
+    }
+
+    return lessThan;
+}
+

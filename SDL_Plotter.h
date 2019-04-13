@@ -1,21 +1,13 @@
-/*
- * SDL_Plotter.h
- * Version 2.1
- *  1/26/2018
- *  Dr. Booth
- */
-
-#ifndef SDL_PLOTTER_H_
-#define SDL_PLOTTER_H_
-
+#ifndef SDL_PLOTTER_H_INCLUDED
+#define SDL_PLOTTER_H_INCLUDED
 //OSX Library
 //#include <SDL2/SDL.h>
 //#include <SDL2/SDL_mixer.h>
 //#include <SDL2/SDL_thread.h>
 
 //Windows Library
-#include "SDL2/SDL.h"
-#include "SDL2/SDL_mixer.h"
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_mixer.h>
 
 #include <string.h>
 #include <iostream>
@@ -122,4 +114,32 @@ public:
 
 };
 
-#endif /* SDL_PLOTTER_H_ */
+
+
+//Threaded Function
+
+static int Sound(void *data){
+	param *p = (param*)data;
+	p->running = true;
+	Mix_Chunk *gScratch = NULL;
+	gScratch = Mix_LoadWAV( p->name.c_str() );
+
+
+	while(p->running){
+		SDL_mutexP( p->mut );
+		  SDL_CondWait(p->cond, p->mut);
+		  Mix_PlayChannel( -1, gScratch, 0 );
+		  p->play = false;
+		SDL_mutexV(p->mut);
+	}
+
+	Mix_FreeChunk( gScratch );
+	p->running = false;
+	return 0;
+}
+
+// SDL Plotter Function Deffinitions
+
+
+
+#endif // SDL_PLOTTER_H_INCLUDED

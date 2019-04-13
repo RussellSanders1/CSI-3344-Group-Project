@@ -14,9 +14,11 @@
 
 #include "point.h"
 #include <iostream>
+#include "SDL_Plotter.h"
 
 class line {
 public:
+    line(point p1, point p2, color_rgb c);
     /*
      * description: constructor
      * return: none
@@ -38,7 +40,7 @@ public:
      * postcondition: this instance doesn't exist
     */
     virtual ~line() = default;
-    
+
     /*
      * description: displays the slope-intercept form of the line to out
      * return: void
@@ -53,7 +55,7 @@ public:
      * postcondition: g has plotted the line this instance represents
     */
     void draw(SDL_Plotter& g);
-    
+
     /*
      * description: sets p1 to value of p
      * return: void
@@ -74,8 +76,8 @@ public:
      * precondition: c valid, passed by reference
      * postcondition: color contains value of c
     */
-    void setColor(color_rgb c){color = c;}
-    
+    void setColor(color_rgb c);
+
     /*
      * description: gets value of p1
      * return: point
@@ -97,7 +99,7 @@ public:
      * postcondition: returns color by value to calling code
     */
     color_rgb getColor(){return color;}
-    
+
     /*
      * description: increments currentColor
      * return: void
@@ -113,13 +115,13 @@ public:
     */
     void resetColor();
 
+    void erase(SDL_Plotter &g);
+
 private:
     point p1, p2;
     color_rgb color;
     bool slope(double& m);
     bool intercept(double& b);
-    int currentColor;
-    
 };
 
 #endif //PROJECT1_LINE_H

@@ -1,7 +1,7 @@
 /*
  * Author: Russell Sanders
  * Assignment Title: Programming_Assignment_1
- * Assignment Description: This program 
+ * Assignment Description: This program
  * Due Date: 1/27/2019
  * Date Created: 1/27/2019
  * Date Last Modified: 1/27/2019

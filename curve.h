@@ -16,6 +16,8 @@
 #include <vector>
 #include "SDL_Plotter.h"
 
+using namespace std;
+
 typedef vector<pair<int,long double>> DataSet_t;
 typedef vector<DataSet_t> Data_t;
 
@@ -28,7 +30,7 @@ public:
      * postcondition: instance of curve created
     */
     curve();
-    
+
     /*
      * description: virtual destructor of curve
      * return: none
@@ -36,7 +38,7 @@ public:
      * postcondition: curve instance doesn't exist
     */
     virtual ~curve() = default;
-    
+
     /*
      * description: displays the points of all curves in data to the ostream
      * referenced
@@ -46,7 +48,7 @@ public:
      * individual sections
     */
     void display(Data_t data, ostream&);
-    
+
     /*
      * description: draws the curves in the Data_t set on the plotter g
      * return: void
@@ -54,7 +56,7 @@ public:
      * postcondition: all curves in data will be plotted on the plotter g
     */
     void draw(Data_t data, SDL_Plotter&);
-    
+
     /*
      * description: returns the value of sameScale
      * return: bool
@@ -62,7 +64,7 @@ public:
      * postcondition: value of sameScale returned to calling code
     */
     bool getSameScale(){ return sameScale;}
-    
+
     /*
      * description: sets sameScale to the value of t
      * return: void
@@ -79,7 +81,7 @@ private:
      * postcondition: the x and y axes will be plotted on the plotter g
     */
     void plotAxis(int margin, int maxX, int maxY, SDL_Plotter& g);
-    
+
     /*
      * description: plots the tick marks of the axes
      * return: void
@@ -87,7 +89,7 @@ private:
      * postcondition: the ticks will be plotted on the plotter g
     */
     void plotTickMarks(int margin, int maxX, int maxY, SDL_Plotter& g);
-    
+
     /*
      * description: verifies the points in a line will fit in the graph region
      * return: bool
@@ -97,6 +99,6 @@ private:
     */
     bool goodPoints(line a, int margin, SDL_Plotter& g);
     bool sameScale;
-    
+
 };
 #endif //PROJECT1_CURVE_H

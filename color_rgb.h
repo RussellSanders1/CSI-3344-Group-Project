@@ -36,7 +36,7 @@ public:
      * postcondition: this instance doesn't exist
     */
     virtual ~color_rgb() = default;
-    
+
     /*
      * description: returns r from color
      * return: int
@@ -58,7 +58,7 @@ public:
      * postcondition: b is returned by value
     */
     int getB();
-    
+
     /*
      * description: sets this->r
      * return: void
@@ -80,7 +80,7 @@ public:
     * postcondition: this->b contains value of b
    */
     void setB(int b);
-    
+
     /*
      * description: assigns this the values in c
      * return: void

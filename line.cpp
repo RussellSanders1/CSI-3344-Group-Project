@@ -11,8 +11,17 @@
 
 #include "line.h"
 
-line::line(): p1(), p2(), color(), currentColor(0) {}
-line::line(point p1, point p2): p1(p1), p2(p2), color(), currentColor(0){}
+line::line(): p1(), p2(), color() {}
+line::line(point p1, point p2): p1(p1), p2(p2), color() {}
+line::line(point p1, point p2, color_rgb c): p1(p1), p2(p2), color(c) {}
+
+void line::setColor(color_rgb c) {
+    this->color = c;
+    this->p1.setColor(c);
+    this->p2.setColor(c);
+}
+
+
 void line::display(ostream&  out){
     double m = 0, b= 0;
     if(slope(m)){
@@ -23,54 +32,42 @@ void line::display(ostream&  out){
     }
 }
 void line::draw(SDL_Plotter& g){
-    double m = 0;
-    switch(currentColor){
-        case 0:
-            this->color = color_rgb(255,0,0);
-            break;
-        case 1:
-            this->color = color_rgb(0,255,0);
-            break;
-        case 2:
-            this->color = color_rgb(0,0,255);
-            break;
-        case 3:
-            this->color = color_rgb(144,12,63);
-            break;
-        case 4:
-            this->color = color_rgb(105,213,207);
-            break;
-        case 5:
-            this->color = color_rgb(160,0,164);
-            break;
-    }
-    double b;
-    if(slope(m)){
-        intercept(b);
-        double delta = 0.1;
-        if(p2.getX() < p1.getX()){
-            delta = -delta;
-        }
-        double y;
-        for(double x = p1.getX(); (int)x != p2.getX(); x += delta){
-            y = m*x + b;
-            g.plotPixel(x,y,color.getR(), color.getG(), color.getB());
-        }
-    }else{
-        int x = this->p1.getX();
-        int minY = min(this->p1.getY(), this->p2.getY());
-        int maxY = max(this->p1.getY(), this->p2.getY());
-        
-        for(int y = minY; y < maxY; y++){
-            g.plotPixel(x,y,this->color.getR(), this->color.getG(),
+    double b = 0, m = 0, delta = 0.001;
+
+    //determine if there is a slope or not so we can use the correct algorithm
+    //draw the line
+    if (this->slope(m)) {
+        this->intercept(b);
+        //using the equation for a line, calculate the x and y points in
+        //between the two endpoints. Use a delta of 0.001 so the line can be
+        //all the way filled in. We can only plot int, so each value will be
+        //converted to an int before being plotted, but this way ensures us
+        //to get in between points we wouldn't get if we incremented by 1
+        //every time
+        for (double x = min(this->p1.getX(), this->p2.getX()); x <
+             max(this->p1.getX(), this->p2.getX()); x+= delta) {
+            g.plotPixel(x,((m * x) + b + 0.5), this->color.getR(), this->color.getG(),
                         this->color.getB());
         }
     }
+    //if there is no slope, the line is just a straight vertical line, so
+    //don't try and calculate points using the slope in an equation to avoid
+    //errors
+    else {
+        for (double y = min(this->p1.getY(), this->p2.getY()); y <
+             max(this->p1.getY(), this->p2.getY()); y+= delta) {
+            g.plotPixel(this->p1.getX(), y, this->color.getR(),
+                        this->color.getG(), this->color.getB());
+        }
+    }
+
+    return;
 }
+
 
 bool line::slope(double &m) {
     bool hasSlope = false;
-    
+
     if(p1.getX() != p2.getX()){
         hasSlope = true;
         m = static_cast<double>(p2.getY() - p1.getY())
@@ -97,10 +94,34 @@ void line::setP2(point p) {
     this->p2 = p;
 }
 
-void line::nextColor() {
-    this->currentColor = (this->currentColor + 1) % 6;
+void line::erase(SDL_Plotter &g) {
+    double b = 0, m = 0, delta = 0.001;
+
+    //determine if there is a slope or not so we can use the correct algorithm
+    //draw the line
+    if (this->slope(m)) {
+        this->intercept(b);
+        //using the equation for a line, calculate the x and y points in
+        //between the two endpoints. Use a delta of 0.001 so the line can be
+        //all the way filled in. We can only plot int, so each value will be
+        //converted to an int before being plotted, but this way ensures us
+        //to get in between points we wouldn't get if we incremented by 1
+        //every time
+        for (double x = min(this->p1.getX(), this->p2.getX()); x <
+             max(this->p1.getX(), this->p2.getX()); x+= delta) {
+            g.plotPixel(x,((m * x) + b + 0.5), 255, 255, 255);
+        }
+    }
+    //if there is no slope, the line is just a straight vertical line, so
+    //don't try and calculate points using the slope in an equation to avoid
+    //errors
+    else {
+        for (double y = min(this->p1.getY(), this->p2.getY()); y <
+             max(this->p1.getY(), this->p2.getY()); y+= delta) {
+            g.plotPixel(this->p1.getX(), y, 255, 255, 255);
+        }
+    }
+
+    return;
 }
 
-void line::resetColor() {
-    this->currentColor = 0;
-}

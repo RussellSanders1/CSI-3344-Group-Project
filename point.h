@@ -45,7 +45,7 @@ public:
      * postcondition: this instance doesn't exist
     */
     virtual ~point() = default;
-    
+
     /*
      * description: sets this->y to value y
      * return: void
@@ -73,14 +73,14 @@ public:
      * precondition: this instance exists
      * postcondition: returns x by value to calling code
     */
-    int getX();
+    int getX() const;
     /*
      * description: gets value of y
      * return: int
      * precondition: this instance exists
      * postcondition: returns y by value to calling code
     */
-    int getY();
+    int getY() const;
     /*
      * description: gets value of color
      * return: int
@@ -109,6 +109,8 @@ public:
      * postcondition: g plots a pixel at the coordinates x, y
     */
     void draw(SDL_Plotter& g);
+
+    bool operator<(const point &rhs) const;
 
 private:
     int x, y;
