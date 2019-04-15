@@ -5,13 +5,40 @@
 #include "point.h"
 #include "line.h"
 #include "circle.h"
-
+#include <cstdlib>
+#include <ctime>
+#include "font.h"
 
 using namespace std;
 
-const int ROW_MAX = 500;
+const int ROW_MAX = 800;
 const int RADIUS = 3;
-const int COL_MAX = 500;
+const int COL_MAX = 800;
+const int MIN_POINTS = 10;
+const int MAX_POINTS = 20;
+const int SLEEP_TIME = 0;
+
+void clearScreen(SDL_Plotter &g) {
+    for (int r = 0; r < ROW_MAX; r++) {
+        for (int c = 0; c < COL_MAX; c++) {
+            g.plotPixel(r, c, 255, 255, 255);
+        }
+    }
+
+    return;
+}
+
+
+void drawCircles(vector<circle> circles, SDL_Plotter &g) {
+    for (int i = 0; i < circles.size(); i++) {
+        circles[i].draw(g);
+    }
+
+    g.update();
+
+    return;
+}
+
 
 // Returns the side of point p with respect to line
 // joining points p1 and p2.
@@ -37,7 +64,7 @@ void bruteHull(vector<circle> &circles, set<point> &hull, SDL_Plotter &g) {
     for (int i = 0; i < circles.size(); i++) {
         circles[i].setColor(color_rgb(255, 0, 0));
         circles[i].draw(g);
-        g.Sleep(500);
+        g.Sleep(SLEEP_TIME);
         for (int j = 0; j < circles.size(); j++) {
             thisSide = 5;
             oneSide = true;
@@ -45,14 +72,14 @@ void bruteHull(vector<circle> &circles, set<point> &hull, SDL_Plotter &g) {
                 line temp(circles[i].getOrigin(), circles[j].getOrigin(), color_rgb(0, 255, 0));
                 temp.draw(g);
                 g.update();
-                g.Sleep(500);
+                g.Sleep(SLEEP_TIME);
 
                 for (int k = 0; k < circles.size() && oneSide; k++) {
                     if (k != i && k != j) {
                         circles[k].setColor(color_rgb(205, 185, 60));
                         circles[k].draw(g);
                         g.update();
-                        g.Sleep(500);
+                        g.Sleep(SLEEP_TIME);
 
                         if (thisSide == 5) {
                             thisSide = findSide(circles[i].getOrigin(), circles[j].getOrigin(), circles[k].getOrigin());
@@ -80,13 +107,13 @@ void bruteHull(vector<circle> &circles, set<point> &hull, SDL_Plotter &g) {
                     }
                 }
                 g.update();
-                g.Sleep(500);
+                g.Sleep(SLEEP_TIME);
             }
         }
 
         circles[i].setColor(color_rgb(0, 0, 0));
         circles[i].draw(g);
-        g.Sleep(500);
+        g.Sleep(SLEEP_TIME);
     }
 
     return;
@@ -189,20 +216,28 @@ void printHull(set<point> &hull) {
 // Driver code
 int main(int argc, char** argv) {
     SDL_Plotter g(ROW_MAX, COL_MAX);
+    int tempX = 0, tempY = 0;
+    font f;
+    char input = '\0';
+    /*
     vector<point> points{point(50, 50), point(132, 30), point(400, 100),
                          point(356, 246), point(370, 400), point(140, 378),
                          point(23, 400), point(15, 103)};
-
+    */
     vector<circle> circles;
-
+    /*
     for (int i = 0; i < points.size(); i++) {
         circles.push_back(circle(points[i], RADIUS, color_rgb(0, 0, 0)));
     }
+    */
 
 	set<point> hull;
 
-	int minIndex = 0, maxIndex = 0;
+	//int minIndex = 0, maxIndex = 0;
 
+	srand(time(0));
+
+	/*
 	for (int i = 1; i < circles.size(); i++) {
         if (circles[i].getOrigin().getX() < circles[minIndex].getOrigin().getX()) {
             minIndex = i;
@@ -212,7 +247,9 @@ int main(int argc, char** argv) {
             maxIndex = i;
         }
 	}
+	*/
 
+	/*
     for (int i = 0; i < circles.size(); i++) {
        circles[i].draw(g);
 	}
@@ -229,17 +266,76 @@ int main(int argc, char** argv) {
 	//quickHull(circles, circles[minIndex], circles[maxIndex], -1, hull, g);
     bruteHull(circles, hull, g);
 	printHull(hull);
+	*/
+    while (!g.getQuit()) {
+        f.plotString(point(200, 150), 4, "CSI 3344", color_rgb(0, 0, 0), g);
+        f.plotString(point(100, 200), 4, "GROUP PROJECT", color_rgb(0, 0, 0), g);
 
+        f.plotString(point(100, 400), 1, "PRESS 1 FOR BRUTE FORCE CLOSEST PAIR", color_rgb(0, 0, 0), g);
+        f.plotString(point(100, 450), 1, "PRESS 2 FOR DIVIDE AND CONQUER CLOSEST PAIR", color_rgb(0, 0, 0), g);
+        f.plotString(point(100, 500), 1, "PRESS 3 FOR BRUTE FORCE CONVEX HULL", color_rgb(0, 0, 0), g);
+        f.plotString(point(100, 550), 1, "PRESS 4 FOR DIVIDE AND CONQUER CONVEX HULL", color_rgb(0, 0, 0), g);
+        g.update();
+        input = '\0';
 
+        while (!g.getQuit() && input != '1' && input != '2' && input != '3' && input != '4') {
+            if (g.kbhit()) {
+                input = g.getKey();
+            }
+        }
 
+        clearScreen(g);
 
-    while(!g.getQuit()){
-		if(g.kbhit()){
-			switch(g.getKey()){
-			}
-		}
-		g.update();
-	}
+        switch(input) {
+            case '3':
+                while(!g.getQuit() && input != LEFT_ARROW){
+                    if(g.kbhit()){
+                        input = g.getKey();
+                        cout << g.getKey() << endl;
+                        switch(input){
+                            case 'R':
+                                for (int i = 0; i < MIN_POINTS + rand() % (MAX_POINTS + 1 - MIN_POINTS); i++) {
+                                    circles.push_back(circle(point((RADIUS + rand() % (COL_MAX + 1 - RADIUS)), (RADIUS + rand() % (ROW_MAX + 1 - RADIUS))), RADIUS, color_rgb(0, 0, 0)));
+                                }
+
+                                drawCircles(circles, g);
+                                break;
+
+                            case '(':
+                                bruteHull(circles, hull, g);
+                                printHull(hull);
+                                break;
+
+                            case 'E':
+                                clearScreen(g);
+                                circles.clear();
+                                hull.clear();
+                                break;
+                            case RIGHT_ARROW:
+                                clearScreen(g);
+                                break;
+
+                            default: break;
+                        }
+                    }
+
+                    else if (g.getMouseClick(tempX, tempY)) {
+                        cout << "click" << endl;
+                        if (tempX > RADIUS && tempY > RADIUS) {
+                            circles.push_back(circle(point(tempX, tempY), RADIUS, color_rgb(0, 0, 0)));
+                            circles[circles.size() - 1].draw(g);
+                        }
+                    }
+
+                    g.update();
+                }
+                break;
+
+            default: break;
+        }
+        clearScreen(g);
+    }
 
 	return 0;
 }
+
