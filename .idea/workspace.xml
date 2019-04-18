@@ -3,9 +3,9 @@
   <component name="BookmarkManager">
     <bookmark url="file://$PROJECT_DIR$/curve.cpp" line="128" />
   </component>
-  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true" buildAllGenerated="true">
     <generated>
-      <config projectName="SDLTest" targetName="BruteForce" />
+      <config projectName="SDLTest" targetName="DivideConquer" />
     </generated>
   </component>
   <component name="CMakeSettings" AUTO_RELOAD="true">
@@ -17,30 +17,11 @@
     <list default="true" id="61f79de9-c90f-4515-bdc0-e45a6ac1db9f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SDLTest/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../SDLTest/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SDLTest/cmake-build-debug/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../SDLTest/cmake-build-debug/CMakeCache.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SDLTest/cmake-build-debug/CMakeFiles/CMakeOutput.log" beforeDir="false" afterPath="$PROJECT_DIR$/../SDLTest/cmake-build-debug/CMakeFiles/CMakeOutput.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SDLTest/cmake-build-debug/CMakeFiles/Makefile.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../SDLTest/cmake-build-debug/CMakeFiles/Makefile.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SDLTest/cmake-build-debug/CMakeFiles/Makefile2" beforeDir="false" afterPath="$PROJECT_DIR$/../SDLTest/cmake-build-debug/CMakeFiles/Makefile2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SDLTest/cmake-build-debug/CMakeFiles/SDLTest.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/../SDLTest/cmake-build-debug/CMakeFiles/SDLTest.dir/CXX.includecache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SDLTest/cmake-build-debug/CMakeFiles/SDLTest.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/../SDLTest/cmake-build-debug/CMakeFiles/SDLTest.dir/build.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SDLTest/cmake-build-debug/CMakeFiles/SDLTest.dir/curve.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/../SDLTest/cmake-build-debug/CMakeFiles/SDLTest.dir/curve.cpp.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SDLTest/cmake-build-debug/CMakeFiles/SDLTest.dir/line.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/../SDLTest/cmake-build-debug/CMakeFiles/SDLTest.dir/line.cpp.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SDLTest/cmake-build-debug/CMakeFiles/SDLTest.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../SDLTest/cmake-build-debug/CMakeFiles/SDLTest.dir/link.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SDLTest/cmake-build-debug/CMakeFiles/SDLTest.dir/main.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/../SDLTest/cmake-build-debug/CMakeFiles/SDLTest.dir/main.cpp.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SDLTest/cmake-build-debug/CMakeFiles/SDLTest.dir/objects.a" beforeDir="false" afterPath="$PROJECT_DIR$/../SDLTest/cmake-build-debug/CMakeFiles/SDLTest.dir/objects.a" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SDLTest/cmake-build-debug/CMakeFiles/SDLTest.dir/point.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/../SDLTest/cmake-build-debug/CMakeFiles/SDLTest.dir/point.cpp.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SDLTest/cmake-build-debug/CMakeFiles/clion-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../SDLTest/cmake-build-debug/CMakeFiles/clion-log.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SDLTest/cmake-build-debug/CMakeFiles/feature_tests.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../SDLTest/cmake-build-debug/CMakeFiles/feature_tests.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SDLTest/cmake-build-debug/CMakeFiles/test.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/../SDLTest/cmake-build-debug/CMakeFiles/test.dir/build.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SDLTest/cmake-build-debug/CMakeFiles/test.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../SDLTest/cmake-build-debug/CMakeFiles/test.dir/link.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SDLTest/cmake-build-debug/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/../SDLTest/cmake-build-debug/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SDLTest/cmake-build-debug/SDLTest.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../SDLTest/cmake-build-debug/SDLTest.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SDLTest/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../SDLTest/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -52,22 +33,10 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/main.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="544">
-              <caret line="112" lean-forward="true" selection-start-line="112" selection-end-line="112" />
-              <folding>
-                <element signature="e#0#19#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
+      <file leaf-file-name="test.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="527">
+            <state relative-caret-position="493">
               <caret line="31" column="4" selection-start-line="31" selection-start-column="4" selection-end-line="31" selection-end-column="4" />
               <folding>
                 <element signature="e#1#19#0" expanded="true" />
@@ -76,12 +45,17 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file leaf-file-name="dqhull.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dqhull.cpp">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file leaf-file-name="color_rgb.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/color_rgb.h">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="119">
@@ -90,7 +64,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file leaf-file-name="line.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/line.h">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="102">
@@ -102,7 +76,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file leaf-file-name="line.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/line.cpp">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="102">
@@ -111,7 +85,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file leaf-file-name="point.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/point.h">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="204">
@@ -120,16 +94,16 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file leaf-file-name="CMakeLists.txt" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="62" selection-start-line="5" selection-start-column="62" selection-end-line="5" selection-end-column="62" />
+            <state relative-caret-position="153">
+              <caret line="9" column="35" selection-start-line="9" selection-start-column="35" selection-end-line="9" selection-end-column="35" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file leaf-file-name="point.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/point.cpp">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="833">
@@ -158,15 +132,26 @@
         <option value="$PROJECT_DIR$/point.cpp" />
         <option value="$PROJECT_DIR$/ConvexHull.h" />
         <option value="$PROJECT_DIR$/ConvexHull.cpp" />
-        <option value="$PROJECT_DIR$/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/main.cpp" />
+        <option value="$PROJECT_DIR$/dqhull.cpp" />
+        <option value="$PROJECT_DIR$/CMakeLists.txt" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
-    <option name="x" value="-12" />
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="NodePackageJsonFileManager">
+    <packageJsonPaths />
+  </component>
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="2" />
+    <option name="y" value="-11" />
     <option name="width" value="1620" />
-    <option name="height" value="1752" />
+    <option name="height" value="1100" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
@@ -181,7 +166,7 @@
           <expand>
             <path>
               <item name="SDLTest" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Group Project" type="462c0819:PsiDirectoryNode" />
+              <item name="CSI-3344-Group-Project" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -219,12 +204,13 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
-    <configuration name="BruteForce" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="SDLTest" TARGET_NAME="BruteForce" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="SDLTest" RUN_TARGET_NAME="BruteForce">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="Application.DivideConquer">
+    <configuration name="Build All" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" CONFIG_NAME="Debug" EXPLICIT_BUILD_TARGET_NAME="all" />
+    <configuration name="DivideConquer" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="SDLTest" TARGET_NAME="DivideConquer" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="SDLTest" RUN_TARGET_NAME="DivideConquer" />
+    <list>
+      <item itemvalue="Application.Build All" />
+      <item itemvalue="Application.DivideConquer" />
+    </list>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -249,51 +235,44 @@
       <workItem from="1549389301301" duration="4215000" />
       <workItem from="1555003697491" duration="3348000" />
       <workItem from="1555034702528" duration="1641000" />
+      <workItem from="1555615993308" duration="527000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="45390000" />
+    <option name="totallyTimeSpent" value="45917000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="0" width="1080" height="1168" extended-state="0" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14117648" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3222004" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39331368" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.11770833" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Database Changes" order="7" />
-      <window_info anchor="bottom" id="Messages" order="8" weight="0.32546705" />
-      <window_info anchor="bottom" id="Terminal" order="9" />
+      <window_info active="true" anchor="bottom" id="CMake" order="12" visible="true" weight="0.32837406" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="11" />
-      <window_info anchor="bottom" id="CMake" order="12" weight="0.3287805" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3222004" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Terminal" order="9" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39331368" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Database" order="3" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Database Changes" order="7" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Messages" order="8" weight="0.32546705" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/main.cpp</url>
-          <line>140</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="watch">
@@ -332,71 +311,10 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/SDL_Plotter.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="122" column="2" selection-start-line="122" selection-start-column="2" selection-end-line="122" selection-end-column="2" />
-          <folding>
-            <element signature="e#233#254#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/color_rgb.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-730" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/curve.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="10" />
-          <folding>
-            <element signature="e#339#357#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/curve.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
-          <folding>
-            <element signature="e#256#273#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SDL_Plotter.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2652">
-          <caret line="156" selection-start-line="156" selection-end-line="156" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ConvexHull.cpp" />
-    <entry file="file://$PROJECT_DIR$/ConvexHull.h" />
-    <entry file="file://C:/Program Files (x86)/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++/ext/new_allocator.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="433">
-          <caret line="135" selection-start-line="135" selection-end-line="135" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/Program Files (x86)/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++/bits/predefined_ops.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="218">
-          <caret line="214" column="13" selection-start-line="214" selection-start-column="13" selection-end-line="214" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
+        <state relative-caret-position="1904">
           <caret line="112" lean-forward="true" selection-start-line="112" selection-end-line="112" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -455,6 +373,114 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="833">
           <caret line="49" column="1" selection-start-line="49" selection-start-column="1" selection-end-line="49" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SDL_Plotter.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="213">
+          <caret line="122" column="2" selection-start-line="122" selection-start-column="2" selection-end-line="122" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/color_rgb.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-730" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/curve.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="10" />
+          <folding>
+            <element signature="e#339#357#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/curve.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SDL_Plotter.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2652">
+          <caret line="156" selection-start-line="156" selection-end-line="156" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ConvexHull.cpp" />
+    <entry file="file://$PROJECT_DIR$/ConvexHull.h" />
+    <entry file="file://C:/Program Files (x86)/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++/ext/new_allocator.h" />
+    <entry file="file://C:/Program Files (x86)/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++/bits/predefined_ops.h" />
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/color_rgb.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="26" selection-start-line="7" selection-start-column="26" selection-end-line="7" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/line.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
+          <folding>
+            <element signature="e#253#271#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/line.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/point.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="24" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/point.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="833">
+          <caret line="49" column="1" selection-start-line="49" selection-start-column="1" selection-end-line="49" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="112" selection-start-line="112" selection-end-line="112" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="31" column="4" selection-start-line="31" selection-start-column="4" selection-end-line="31" selection-end-column="4" />
+          <folding>
+            <element signature="e#1#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dqhull.cpp">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="35" selection-start-line="9" selection-start-column="35" selection-end-line="9" selection-end-column="35" />
         </state>
       </provider>
     </entry>
