@@ -22,13 +22,15 @@ public:
     double getRadius();
 
     void setOrigin(const point);
-    point getOrigin();
+    point getOrigin() const;
 
     void setColor(const color_rgb);
     color_rgb getColor();
 
     void draw(SDL_Plotter& g);
     void eraseCircle(SDL_Plotter& g);
+
+    bool operator<(const circle &rhs) const;
 };
 
 

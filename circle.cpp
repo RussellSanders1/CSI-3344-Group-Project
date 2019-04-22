@@ -24,7 +24,7 @@ void circle::setOrigin(const point a) {
     origin = a;
 }
 
-point circle::getOrigin() {
+point circle::getOrigin() const {
     return origin;
 }
 
@@ -58,4 +58,8 @@ void circle::eraseCircle(SDL_Plotter& g) {
             }
         }
     }
+}
+
+bool circle::operator<(const circle &rhs) const {
+    return this->getOrigin() < rhs.getOrigin();
 }

@@ -112,6 +112,8 @@ public:
 
     bool operator<(const point &rhs) const;
 
+    bool operator==(const point &rhs) const;
+
 private:
     int x, y;
     color_rgb color;

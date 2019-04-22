@@ -1,3 +1,4 @@
+/*
 #include <iostream>
 #include <cstdlib>
 #include <set>
@@ -195,7 +196,7 @@ void quickHull(vector<circle> circles, circle p1, circle p2, int side, set<point
 
 }
 */
-
+/*
 void printHull(set<point> &hull) {
 	// a[i].second -> y-coordinate of the ith point
 	/*
@@ -205,7 +206,7 @@ void printHull(set<point> &hull) {
 		return;
 	}
 	*/
-
+    /*
 	cout << "The points in Convex Hull are: " << endl;
 	for (auto i: hull) {
         cout << "(" << i.getX() << ", " << i.getY() << ") ";
@@ -224,18 +225,18 @@ int main(int argc, char** argv) {
                          point(356, 246), point(370, 400), point(140, 378),
                          point(23, 400), point(15, 103)};
     */
-    vector<circle> circles;
+    //vector<circle> circles;
     /*
     for (int i = 0; i < points.size(); i++) {
         circles.push_back(circle(points[i], RADIUS, color_rgb(0, 0, 0)));
     }
     */
 
-	set<point> hull;
+	//set<point> hull;
 
 	//int minIndex = 0, maxIndex = 0;
 
-	srand(time(0));
+	//srand(time(0));
 
 	/*
 	for (int i = 1; i < circles.size(); i++) {
@@ -267,6 +268,7 @@ int main(int argc, char** argv) {
     bruteHull(circles, hull, g);
 	printHull(hull);
 	*/
+	/*
     while (!g.getQuit()) {
         f.plotString(point(200, 150), 4, "CSI 3344", color_rgb(0, 0, 0), g);
         f.plotString(point(100, 200), 4, "GROUP PROJECT", color_rgb(0, 0, 0), g);
@@ -338,4 +340,5 @@ int main(int argc, char** argv) {
 
 	return 0;
 }
+*/
 

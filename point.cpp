@@ -70,3 +70,14 @@ bool point::operator<(const point &rhs) const {
     return lessThan;
 }
 
+bool point::operator==(const point &rhs) const {
+    bool isEqual = false;
+
+    if (this->getX() == rhs.getX() && this->getY() == rhs.getY()) {
+        isEqual = true;
+    }
+
+    return isEqual;
+}
+
+
