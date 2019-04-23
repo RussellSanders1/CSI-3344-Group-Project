@@ -1,4 +1,6 @@
 #include "constants.h"
+#include "divideHullFunctions.h"
+
 
 using namespace std;
 

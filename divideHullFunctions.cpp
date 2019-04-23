@@ -2,8 +2,6 @@
 
 using namespace std;
 
-point middle = point(0, 0);
-
 // determines the quadrant of a point
 // (used in compare())
 int getQuadrant(point p) {
@@ -44,6 +42,7 @@ int orientation(point a, point b, point c) {
 }
 
 // compare function for sorting
+/*
 bool compare(point p1, point q1) {
     bool comparison = false;
 	point p(p1.getX() - middle.getX(), p1.getY() - middle.getY());
@@ -61,6 +60,7 @@ bool compare(point p1, point q1) {
 
 	return comparison;
 }
+*/
 
 // Finds upper tangent of two polygons 'a' and 'b'
 // represented as two vectors.
@@ -91,10 +91,11 @@ vector<point> merger(vector<point> a, vector<point> b) {
 
 	while (!done) {
 		done = true;
+		//modulation cycles through the set of points going forward
 		while (orientation(b[indb], a[inda], a[(inda + 1) % n1]) >= 0) {
 			inda = (inda + 1) % n1;
 		}
-
+        //modulation cycles through the set of points going backwards
 		while (orientation(a[inda], b[indb], b[(n2 + indb - 1) % n2]) <= 0) {
 			indb = (n2 + indb - 1) % n2;
 			done = false;
@@ -104,7 +105,7 @@ vector<point> merger(vector<point> a, vector<point> b) {
 	int uppera = inda, upperb = indb;
 	inda = ia, indb = ib;
 	done = false;
-	int g = 0;
+	//int g = 0;
 	//finding the lower tangent
 	while (!done) {
 		done = true;
@@ -213,10 +214,11 @@ vector<point> bruteHullSimple(vector<circle> &circles) {
 
 // Returns the convex hull for the given set of points
 vector<point> divideHull(vector<circle> &a) {
+    point middle;
 	// If the number of points is less than 6 then the
 	// function uses the brute algorithm to find the
 	// convex hull
-	if (a.size() <= 5) {
+	if (a.size() <= BRUTEFORCE_MIN) {
         vector<point> ret = bruteHullSimple(a);
         middle.setX(0);
         middle.setY(0);
@@ -227,7 +229,24 @@ vector<point> divideHull(vector<circle> &a) {
             ret[i].setX(ret[i].getX() * n);
             ret[i].setY(ret[i].getY() * n);
         }
-        sort(ret.begin(), ret.end(), compare);
+        auto comp = [&](point p1, point q1)-> bool{
+            bool comparison;
+            point p(p1.getX() - middle.getX(), p1.getY() - middle.getY());
+            point q(q1.getX() - middle.getX(), q1.getY() - middle.getY());
+    
+            int one = getQuadrant(p);
+            int two = getQuadrant(q);
+    
+            if (one != two) {
+                comparison = (one < two);
+            }
+            else {
+                comparison = (p.getY() * q.getX() < q.getY() * p.getX());
+            }
+    
+            return comparison;
+        };
+        sort(ret.begin(), ret.end(), comp);
         for (int i = 0; i < ret.size(); i++) {
             ret[i] = point(ret[i].getX() / n, ret[i].getY() / n);
         }

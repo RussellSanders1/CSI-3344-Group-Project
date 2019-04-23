@@ -32,5 +32,7 @@ const color_rgb SECOND_SELECTED_POINT_COLOR = color_rgb(205, 185, 60);
 const color_rgb HULL_LINE_COLOR = color_rgb(0, 0, 255);
 const color_rgb BLACK = color_rgb(0, 0, 0);
 
+const int BRUTEFORCE_MIN = 5;
+
 
 #endif // CONSTANTS_H_INCLUDED
