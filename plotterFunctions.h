@@ -19,4 +19,12 @@ void drawMenu(SDL_Plotter &g);
 
 void generateRandomPoints(vector<circle> &circles, SDL_Plotter &g);
 
+void printHull(vector<circle> &hull, ostream &out);
+
+void printPair(line a, ostream &out);
+
+bool isStraightLine(vector<circle> &circles);
+
+void eliminateDuplicates(vector<circle> &circles);
+
 #endif // PLOTTERFUNCTIONS_H_INCLUDED

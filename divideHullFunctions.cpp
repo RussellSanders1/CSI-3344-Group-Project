@@ -23,10 +23,10 @@ int getQuadrant(point p) {
 }
 
 // Checks whether the line is crossing the polygon
-int orientation(point a, point b, point c) {
+int orientation(line l, point p) {
     int orientation = 0;
-	int res = (b.getY() - a.getY()) * (c.getX() - b.getX()) -
-			(c.getY() - b.getY()) * (b.getX() - a.getX());
+	int res = (l.getP2().getY() - l.getP1().getY()) * (p.getX() - l.getP2().getX()) -
+			(p.getY() - l.getP2().getY()) * (l.getP2().getX() - l.getP1().getX());
 
 	if (res == 0) {
         orientation = 0;
@@ -41,232 +41,271 @@ int orientation(point a, point b, point c) {
 	return orientation;
 }
 
-// compare function for sorting
-/*
-bool compare(point p1, point q1) {
-    bool comparison = false;
-	point p(p1.getX() - middle.getX(), p1.getY() - middle.getY());
-	point q(q1.getX() - middle.getX(), q1.getY() - middle.getY());
-
-	int one = getQuadrant(p);
-	int two = getQuadrant(q);
-
-	if (one != two) {
-		comparison = (one < two);
-	}
-	else {
-        comparison = (p.getY() * q.getX() < q.getY() * p.getX());
-	}
-
-	return comparison;
-}
-*/
-
 // Finds upper tangent of two polygons 'a' and 'b'
 // represented as two vectors.
-vector<point> merger(vector<point> a, vector<point> b) {
+vector<circle> merger(vector<circle> &left, vector<circle> &right, SDL_Plotter &g) {
 	// n1 -> number of points in polygon a
 	// n2 -> number of points in polygon b
-	int n1 = a.size(), n2 = b.size();
+	int leftSize = left.size();
+	int rightSize = right.size();
 
-	int ia = 0, ib = 0;
+	int rightMost = 0, leftMost = 0;
 
 	//ia -> rightmost point of a
-	for (int i = 1; i < n1; i++) {
-		if (a[i].getX() > a[ia].getX()) {
-			ia = i;
+	for (int i = 1; i < leftSize; i++) {
+		if (left[i].getOrigin().getX() > left[rightMost].getOrigin().getX()) {
+			rightMost = i;
 		}
 	}
+
+	left[rightMost].setColor(FIRST_SELECTED_POINT_COLOR);
+	left[rightMost].draw(g);
 
 	// ib -> leftmost point of b
-	for (int i = 1; i < n2; i++) {
-		if (b[i].getX() < b[ib].getX()) {
-			ib = i;
+	for (int i = 1; i < rightSize; i++) {
+		if (right[i].getOrigin().getX() < right[leftMost].getOrigin().getX()) {
+			leftMost = i;
 		}
 	}
+
+	right[leftMost].setColor(FIRST_SELECTED_POINT_COLOR);
+	right[leftMost].draw(g);
+
+	g.update();
+	g.Sleep(SLEEP_TIME);
 
 	// finding the upper tangent
-	int inda = ia, indb = ib;
-	bool done = false;
+	int tempLeft = rightMost, tempRight = leftMost;
+	bool foundTangent = false;
 
-	while (!done) {
-		done = true;
+	line upperTangent(left[rightMost].getOrigin(), right[leftMost].getOrigin(), TEMP_LINE_COLOR);
+
+	while (!foundTangent) {
+        upperTangent.draw(g);
+        g.update();
+        g.Sleep(SLEEP_TIME);
+		foundTangent = true;
 		//modulation cycles through the set of points going forward
-		while (orientation(b[indb], a[inda], a[(inda + 1) % n1]) >= 0) {
-			inda = (inda + 1) % n1;
+		while (orientation(line(right[tempRight].getOrigin(), left[tempLeft].getOrigin()), left[(tempLeft + 1) % leftSize].getOrigin()) >= 0) {
+            left[tempLeft].setColor(BLACK);
+            left[tempLeft].draw(g);
+			tempLeft = (tempLeft + 1) % leftSize;
+			left[tempLeft].setColor(FIRST_SELECTED_POINT_COLOR);
+			left[tempLeft].draw(g);
+			g.update();
+			g.Sleep(SLEEP_TIME);
 		}
         //modulation cycles through the set of points going backwards
-		while (orientation(a[inda], b[indb], b[(n2 + indb - 1) % n2]) <= 0) {
-			indb = (n2 + indb - 1) % n2;
-			done = false;
+		while (orientation(line(left[tempLeft].getOrigin(), right[tempRight].getOrigin()), right[(rightSize + tempRight - 1) % rightSize].getOrigin()) <= 0) {
+            right[tempRight].setColor(BLACK);
+            right[tempRight].draw(g);
+			tempRight = (rightSize + tempRight - 1) % rightSize;
+			foundTangent = false;
+			right[tempRight].setColor(FIRST_SELECTED_POINT_COLOR);
+			right[tempRight].draw(g);
+			g.update();
+			g.Sleep(SLEEP_TIME);
 		}
+
+		upperTangent.erase(g);
+		upperTangent.setP1(left[tempLeft].getOrigin());
+		upperTangent.setP2(right[tempRight].getOrigin());
 	}
 
-	int uppera = inda, upperb = indb;
-	inda = ia, indb = ib;
-	done = false;
+	left[tempLeft].setColor(BLACK);
+	left[tempLeft].draw(g);
+	right[tempRight].setColor(BLACK);
+	right[tempRight].draw(g);
+
+	upperTangent.setColor(HULL_LINE_COLOR);
+	upperTangent.draw(g);
+	g.update();
+
+	int upperLeft = tempLeft, upperRight = tempRight;
+	tempLeft = rightMost, tempRight = leftMost;
+	foundTangent = false;
+	left[tempLeft].setColor(FIRST_SELECTED_POINT_COLOR);
+	left[tempLeft].draw(g);
+	right[tempRight].setColor(FIRST_SELECTED_POINT_COLOR);
+	right[tempRight].draw(g);
+
+	line lowerTangent(left[tempLeft].getOrigin(), right[tempRight].getOrigin(), TEMP_LINE_COLOR);
 	//int g = 0;
 	//finding the lower tangent
-	while (!done) {
-		done = true;
-		while (orientation(a[inda], b[indb], b[(indb + 1) % n2]) >= 0) {
-			indb = (indb + 1) % n2;
+	while (!foundTangent) {
+		foundTangent = true;
+		while (orientation(line(left[tempLeft].getOrigin(), right[tempRight].getOrigin()), right[(tempRight+ 1) % rightSize].getOrigin()) >= 0) {
+            right[tempRight].setColor(BLACK);
+            right[tempRight].draw(g);
+			tempRight = (tempRight + 1) % rightSize;
+            right[tempRight].setColor(FIRST_SELECTED_POINT_COLOR);
+			right[tempRight].draw(g);
+			g.update();
+			g.Sleep(SLEEP_TIME);
+
 		}
 
-		while (orientation(b[indb], a[inda], a[(n1 + inda - 1) % n1]) <= 0) {
-			inda = (n1 + inda - 1) % n1;
-			done = false;
+		while (orientation(line(right[tempRight].getOrigin(), left[tempLeft].getOrigin()), left[(leftSize + tempLeft - 1) % leftSize].getOrigin()) <= 0) {
+            left[tempLeft].setColor(BLACK);
+            left[tempLeft].draw(g);
+			tempLeft = (leftSize + tempLeft - 1) % leftSize;
+			foundTangent = false;
+			left[tempLeft].setColor(FIRST_SELECTED_POINT_COLOR);
+			left[tempLeft].draw(g);
+			g.update();
+			g.Sleep(SLEEP_TIME);
 		}
+
+        lowerTangent.erase(g);
+		lowerTangent.setP1(left[tempLeft].getOrigin());
+		lowerTangent.setP2(right[tempRight].getOrigin());
 	}
 
-	int lowera = inda, lowerb = indb;
-	vector<point> ret;
+    left[tempLeft].setColor(BLACK);
+	left[tempLeft].draw(g);
+	right[tempRight].setColor(BLACK);
+	right[tempRight].draw(g);
+
+	lowerTangent.setColor(HULL_LINE_COLOR);
+	lowerTangent.draw(g);
+	g.update();
+	g.Sleep(SLEEP_TIME);
+
+    line tempLine;
+
+    for (int i = 0; i < left.size() - 1; i++) {
+        tempLine.setP1(left[i].getOrigin());
+        tempLine.setP2(left[i + 1].getOrigin());
+        tempLine.erase(g);
+    }
+
+    tempLine.setP1(left[0].getOrigin());
+    tempLine.setP2(left[left.size() - 1].getOrigin());
+    tempLine.erase(g);
+
+    for (int i = 0; i < right.size() - 1; i++) {
+        tempLine.setP1(right[i].getOrigin());
+        tempLine.setP2(right[i + 1].getOrigin());
+        tempLine.erase(g);
+    }
+
+    tempLine.setP1(right[0].getOrigin());
+    tempLine.setP2(right[right.size() - 1].getOrigin());
+    tempLine.erase(g);
+
+	int lowerLeft = tempLeft, lowerRight= tempRight;
+	vector<circle> merged;
 
 	//ret contains the convex hull after merging the two convex hulls
 	//with the points sorted in anti-clockwise order
-	int ind = uppera;
-	ret.push_back(a[uppera]);
-	while (ind != lowera) {
-		ind = (ind + 1) % n1;
-		ret.push_back(a[ind]);
+	int tempMerged = upperLeft;
+	merged.push_back(left[upperLeft]);
+	while (tempMerged != lowerLeft) {
+		tempMerged = (tempMerged + 1) % leftSize;
+		merged.push_back(left[tempMerged]);
 	}
 
-	ind = lowerb;
-	ret.push_back(b[lowerb]);
-	while (ind != upperb) {
-		ind = (ind + 1) % n2;
-		ret.push_back(b[ind]);
+	tempMerged = lowerRight;
+	merged.push_back(right[lowerRight]);
+	while (tempMerged != upperRight) {
+		tempMerged = (tempMerged + 1) % rightSize;
+		merged.push_back(right[tempMerged]);
 	}
 
-	return ret;
+	tempLine.setColor(HULL_LINE_COLOR);
+
+	for (int i = 0; i < merged.size() - 1; i++) {
+        tempLine.setP1(merged[i].getOrigin());
+        tempLine.setP2(merged[i + 1].getOrigin());
+        tempLine.draw(g);
+	}
+
+	tempLine.setP1(merged[0].getOrigin());
+	tempLine.setP2(merged[merged.size() - 1].getOrigin());
+	tempLine.draw(g);
+
+	drawCircles(left, g);
+	drawCircles(right, g);
+	g.Sleep(SLEEP_TIME);
+
+	return merged;
 }
-
-vector<point> bruteHullSimple(vector<circle> &circles) {
-    vector<point> hull;
-    bool added = false;
-    bool finished = false;
-    bool oneSide = true;
-    int thisSide = 5;
-    int nextPoint = -1;
-
-    if (circles.size() < 3) {
-        return hull;
-    }
-
-    for (int i = 0; i < circles.size() && !finished; i++) {
-        if (hull.size() != 0) {
-            finished = true;
-        }
-
-        added = false;
-
-        if (nextPoint != -1) {
-            i = nextPoint;
-        }
-
-        for (int j = 0; j < circles.size() && !added; j++) {
-            thisSide = 5;
-            oneSide = true;
-            if (j != i) {
-                line temp(circles[i].getOrigin(), circles[j].getOrigin(), TEMP_LINE_COLOR);
-
-                for (int k = 0; k < circles.size() && oneSide; k++) {
-                    if (k != i && k != j) {
-                        if (thisSide == 5) {
-                            thisSide = findSide(temp, circles[k].getOrigin());
-                        }
-                        else {
-                            if (findSide(temp, circles[k].getOrigin()) != thisSide) {
-                                oneSide = false;
-                            }
-                        }
-                    }
-                }
-                if (oneSide) {
-                    if (nextPoint == -1) {
-                        hull.push_back(circles[i].getOrigin());
-                    }
-                    added = true;
-                    finished = false;
-                    for (int search = 0; search < hull.size(); search++) {
-                        if (hull[search] == circles[j].getOrigin()) {
-                            added = false;
-                            finished = true;
-                        }
-                    }
-
-                    if (added == true) {
-                        hull.push_back(circles[j].getOrigin());
-                    }
-                    nextPoint = j;
-                }
-            }
-        }
-
-        if (nextPoint != -1) {
-            i--;
-        }
-    }
-
-    return hull;
-}
-
 
 // Returns the convex hull for the given set of points
-vector<point> divideHull(vector<circle> &a) {
+vector<circle> divideHull(vector<circle> &circles, SDL_Plotter &g) {
+    if (circles.size() <  3) {
+        return vector<circle>();
+    }
+    sort(circles.begin(), circles.end());
     point middle;
 	// If the number of points is less than 6 then the
 	// function uses the brute algorithm to find the
 	// convex hull
-	if (a.size() <= BRUTEFORCE_MIN) {
-        vector<point> ret = bruteHullSimple(a);
+	if (circles.size() <= BRUTEFORCE_MIN) {
+        vector<circle> hull = bruteHull(circles, g);
         middle.setX(0);
         middle.setY(0);
-        int n = ret.size();
+        int n = hull.size();
         for (int i = 0; i < n; i++) {
-            middle.setX(middle.getX() + ret[i].getX());
-            middle.setY(middle.getY() + ret[i].getY());
-            ret[i].setX(ret[i].getX() * n);
-            ret[i].setY(ret[i].getY() * n);
+            middle.setX(middle.getX() + hull[i].getOrigin().getX());
+            middle.setY(middle.getY() + hull[i].getOrigin().getY());
+            hull[i].setOrigin(point(hull[i].getOrigin().getX() * n, hull[i].getOrigin().getY() * n));
         }
-        auto comp = [&](point p1, point q1)-> bool{
+
+        auto comp = [&](circle p1, circle q1)-> bool{
             bool comparison;
-            point p(p1.getX() - middle.getX(), p1.getY() - middle.getY());
-            point q(q1.getX() - middle.getX(), q1.getY() - middle.getY());
-    
+            point p(p1.getOrigin().getX() - middle.getX(), p1.getOrigin().getY() - middle.getY());
+            point q(q1.getOrigin().getX() - middle.getX(), q1.getOrigin().getY() - middle.getY());
+
             int one = getQuadrant(p);
             int two = getQuadrant(q);
-    
+
             if (one != two) {
                 comparison = (one < two);
             }
             else {
                 comparison = (p.getY() * q.getX() < q.getY() * p.getX());
             }
-    
+
             return comparison;
         };
-        sort(ret.begin(), ret.end(), comp);
-        for (int i = 0; i < ret.size(); i++) {
-            ret[i] = point(ret[i].getX() / n, ret[i].getY() / n);
+
+        sort(hull.begin(), hull.end(), comp);
+        for (int i = 0; i < hull.size(); i++) {
+            hull[i].setOrigin(point((hull[i].getOrigin().getX() / n), (hull[i].getOrigin().getY() / n)));
         }
 
-        return ret;
+        return hull;
 	}
 
 	// left contains the left half points
 	// right contains the right half points
 	vector<circle> left, right;
-	for (int i = 0; i < a.size() / 2; i++) {
-		left.push_back(a[i]);
+	for (int i = 0; i < circles.size() / 2; i++) {
+		left.push_back(circles[i]);
 	}
-	for (int i = a.size() / 2; i < a.size(); i++) {
-		right.push_back(a[i]);
+	for (int i = circles.size() / 2; i < circles.size(); i++) {
+		right.push_back(circles[i]);
 	}
+
+	for (int i = 0; i < right.size(); i++) {
+        right[i].setColor(HIDDEN_COLOR);
+	}
+	drawCircles(right, g);
+	g.Sleep(SLEEP_TIME);
+
 	// convex hull for the left and right sets
-	vector<point> leftHull = divideHull(left);
-	vector<point> rightHull = divideHull(right);
+	vector<circle> leftHull = divideHull(left, g);
+
+	for (int i = 0; i < right.size(); i++) {
+        right[i].setColor(BLACK);
+	}
+	drawCircles(right, g);
+
+	vector<circle> rightHull = divideHull(right, g);
+
+	drawCircles(circles, g);
 
 	// merging the convex hulls
-	return merger(leftHull, rightHull);
+	return merger(leftHull, rightHull, g);
 }

@@ -15,20 +15,21 @@ int findSide(line l, point p) {
 }
 
 
-vector<point> bruteHull(vector<circle> &circles, SDL_Plotter &g) {
-    clearScreen(g);
-    drawCircles(circles, g);
-    g.update();
-
-    vector<point> hull;
+vector<circle> bruteHull(vector<circle> &circles, SDL_Plotter &g) {
+    vector<circle> hull;
     vector<line> hullLines;
     bool added = false;
     bool finished = false;
     bool oneSide = true;
+    bool noHull = true;
     int thisSide = 5;
     int nextPoint = -1;
 
     if (circles.size() < 3) {
+        return hull;
+    }
+
+    if (isStraightLine(circles)) {
         return hull;
     }
 
@@ -77,19 +78,19 @@ vector<point> bruteHull(vector<circle> &circles, SDL_Plotter &g) {
                 }
                 if (oneSide) {
                     if (nextPoint == -1) {
-                        hull.push_back(circles[i].getOrigin());
+                        hull.push_back(circles[i]);
                     }
                     added = true;
                     finished = false;
                     for (int search = 0; search < hull.size(); search++) {
-                        if (hull[search] == circles[j].getOrigin()) {
+                        if (hull[search].getOrigin() == circles[j].getOrigin()) {
                             added = false;
                             finished = true;
                         }
                     }
 
                     if (added == true) {
-                        hull.push_back(circles[j].getOrigin());
+                        hull.push_back(circles[j]);
                     }
 
                     temp.setColor(HULL_LINE_COLOR);
@@ -122,17 +123,4 @@ vector<point> bruteHull(vector<circle> &circles, SDL_Plotter &g) {
     }
 
     return hull;
-}
-
-void printHull(vector<point> &hull) {
-	if (hull.size() >= 3) {
-        cout << "The points in Convex Hull are: " << endl;
-        for (int i = 0; i < hull.size(); i++) {
-            cout << "(" << hull[i].getX() << ", " << hull[i].getY() << ") ";
-        }
-	}
-
-	cout << endl;
-
-	return;
 }

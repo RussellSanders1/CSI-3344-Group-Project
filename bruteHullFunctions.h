@@ -15,8 +15,7 @@ using namespace std;
 
 int findSide(line l, point p);
 
-vector<point> bruteHull(vector<circle> &circles, SDL_Plotter &g);
+vector<circle> bruteHull(vector<circle> &circles, SDL_Plotter &g);
 
-void printHull(vector<point> &hull);
 
 #endif // BRUTEHULLFUNCTIONS_H_INCLUDED

@@ -1,6 +1,5 @@
+/*
 #include "constants.h"
-#include "divideHullFunctions.h"
-
 
 using namespace std;
 
@@ -30,5 +29,6 @@ int main(int argc, char** argv) {
 
 	return 0;
 }
+*/
 
 

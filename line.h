@@ -15,6 +15,7 @@
 #include "point.h"
 #include <iostream>
 #include "SDL_Plotter.h"
+#include <cmath>
 
 class line {
 public:
@@ -116,6 +117,10 @@ public:
     void resetColor();
 
     void erase(SDL_Plotter &g);
+
+    double distance();
+
+    bool intersects(point a);
 
 private:
     point p1, p2;

@@ -43,9 +43,58 @@ void generateRandomPoints(vector<circle> &circles, SDL_Plotter &g) {
                                  RADIUS, color_rgb(0, 0, 0)));
     }
 
-    drawCircles(circles, g);
-
     return;
 }
 
+void printHull(vector<circle> &hull, ostream &out) {
+	if (hull.size() >= 3) {
+        out << "The points in Convex Hull are: " << endl;
+        for (int i = 0; i < hull.size(); i++) {
+            out << "(" << hull[i].getOrigin().getX() << ", " << hull[i].getOrigin().getY() << ") ";
+        }
+	}
+
+	out << endl;
+
+	return;
+}
+
+
+void printPair(line a, ostream &out) {
+    if (a.getP1() == a.getP2()) {
+        return;
+    }
+    out << "Closest pair: (" << a.getP1().getX() << ", " << a.getP1().getY();
+    out << ") (" << a.getP2().getX() << ", " << a.getP2().getY() << ")" << endl;
+}
+
+bool isStraightLine(vector<circle> &circles) {
+    bool isStraight = true;
+    sort(circles.begin(), circles.end());
+    line temp(circles[0].getOrigin(), circles[circles.size() - 1].getOrigin());
+
+    for (int i = 1; i < circles.size() - 1 && isStraight; i++) {
+        if (!temp.intersects(circles[i].getOrigin())) {
+            isStraight = false;
+        }
+    }
+
+    return isStraight;
+}
+
+void eliminateDuplicates(vector<circle> &circles) {
+    set<circle> s;
+
+    for (int i = 0; i < circles.size(); i++) {
+        s.insert(circles[i]);
+    }
+
+    circles.clear();
+
+    for (auto i: s) {
+        circles.push_back(i);
+    }
+
+    return;
+}
 

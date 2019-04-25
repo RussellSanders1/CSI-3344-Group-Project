@@ -125,4 +125,31 @@ void line::erase(SDL_Plotter &g) {
     return;
 }
 
+double line::distance(){
+    return sqrt(((p2.getX() - p1.getX()) * (p2.getX() - p1.getX())) +
+                ((p2.getY() - p1.getY()) * (p2.getY() - p1.getY())));
+}
+
+bool line::intersects(point a) {
+    bool intersect = false;
+    line that(this->getP1(), a);
+    double thisSlope = 0, thatSlope = 0;
+
+    if (this->slope(thisSlope) && that.slope(thatSlope)) {
+        if (thisSlope == thatSlope) {
+            intersect = true;
+        }
+        else if (thisSlope == thatSlope * -1) {
+            intersect = true;
+        }
+    }
+    else if (!this->slope(thisSlope) && !that.slope(thatSlope)) {
+        if (a.getX() == this->getP1().getX()) {
+            intersect = true;
+        }
+    }
+
+    return intersect;
+}
+
 
