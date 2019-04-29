@@ -12,9 +12,8 @@ int main(int argc, char** argv) {
         drawMenu(g);
         input = '\0';
 
-        while (!g.getQuit() && input != BRUTEPAIR_OPTION
-               && input != DIVIDEPAIR_OPTION && input != BRUTEHULL_OPTION
-               && input != DIVIDEHULL_OPTION) {
+        while (!g.getQuit() && input != PAIR_OPTION && input != HULL_OPTION
+               && input != CONTROLS_OPTION) {
             if (g.kbhit()) {
                 input = g.getKey();
             }
@@ -23,16 +22,19 @@ int main(int argc, char** argv) {
         clearScreen(g);
 
         switch(input) {
-            case BRUTEPAIR_OPTION:
-                caseBrutePair(g);
+            case CONTROLS_OPTION:
+                drawControls(g);
+                while (!g.kbhit()) {
+
+                }
                 break;
 
-            case BRUTEHULL_OPTION:
-                caseBruteHull(g);
+            case PAIR_OPTION:
+                casePair(g, cout);
                 break;
 
-            case DIVIDEHULL_OPTION:
-                caseDivideHull(g);
+            case HULL_OPTION:
+                caseHull(g, cout);
                 break;
 
             default: break;
@@ -43,3 +45,4 @@ int main(int argc, char** argv) {
 
 	return 0;
 }
+

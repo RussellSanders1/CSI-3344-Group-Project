@@ -65,7 +65,7 @@ void line::draw(SDL_Plotter& g){
 }
 
 
-bool line::slope(double &m) {
+bool line::slope(double &m) const {
     bool hasSlope = false;
 
     if(p1.getX() != p2.getX()){
@@ -151,5 +151,63 @@ bool line::intersects(point a) {
 
     return intersect;
 }
+
+int line::findSide(point a) {
+    double m, b;
+    int side;
+    point thisLine;
+    thisLine.setX(a.getX());
+    if (this->slope(m)) {
+        this->intercept(b);
+        thisLine.setY(m * thisLine.getX() + b);
+        if (thisLine.getY() < a.getY()) {
+            side = -1;
+        }
+        else if (thisLine.getY() > a.getY()) {
+            side = 1;
+        }
+        else {
+            side = 0;
+        }
+    }
+    else {
+        thisLine.setY(a.getY());
+        thisLine.setX(this->p1.getX());
+
+        if (thisLine.getX() > a.getX()) {
+            side = 1;
+        }
+        else if (thisLine.getX() < a.getX()) {
+            side = -1;
+        }
+        else {
+            side = 0;
+        }
+    }
+
+    return side;
+}
+
+bool line::operator==(const line &other) {
+    bool isEqual = false;
+    double thisSlope, otherSlope;
+    if (this->getP1() == other.getP1() && this->getP2() == other.getP2()) {
+        isEqual = true;
+    }
+    else if (this->slope(thisSlope) && other.slope(otherSlope)) {
+        if (thisSlope == otherSlope && this->intersects(other.getP1())) {
+            isEqual = true;
+        }
+    }
+    else if (!this->slope(thisSlope) && !other.slope(otherSlope)) {
+        if (this->p1.getX() == other.getP1().getX()) {
+            isEqual = true;
+        }
+    }
+
+    return isEqual;
+}
+
+
 
 

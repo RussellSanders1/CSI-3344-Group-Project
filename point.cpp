@@ -80,4 +80,23 @@ bool point::operator==(const point &rhs) const {
     return isEqual;
 }
 
+int point::getQuadrant() {
+    int quadrant = 0;
+	if (this->getX() >= 0 && this->getY() >= 0) {
+        quadrant = 1;
+	}
+	else if (this->getX() <= 0 && this->getY() >= 0) {
+        quadrant = 2;
+	}
+	else if (this->getX() <= 0 && this->getY() <= 0) {
+        quadrant = 3;
+	}
+	else {
+        quadrant = 4;
+	}
+
+	return quadrant;
+}
+
+
 

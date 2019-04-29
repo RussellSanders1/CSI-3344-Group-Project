@@ -114,6 +114,8 @@ public:
 
     bool operator==(const point &rhs) const;
 
+    int getQuadrant();
+
 private:
     int x, y;
     color_rgb color;

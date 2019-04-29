@@ -85,14 +85,14 @@ public:
      * precondition: p1 valid
      * postcondition: returns p1 by value to calling code
     */
-    point getP1(){return p1;}
+    point getP1() const {return p1;}
     /*
      * description: gets value of p2
      * return: point
      * precondition: p2 valid
      * postcondition: returns p2 by value to calling code
     */
-    point getP2(){return p2;}
+    point getP2() const {return p2;}
     /*
      * description: gets value of color
      * return: color
@@ -122,10 +122,14 @@ public:
 
     bool intersects(point a);
 
+    int findSide(point a);
+
+    bool operator==(const line &other);
+
 private:
     point p1, p2;
     color_rgb color;
-    bool slope(double& m);
+    bool slope(double& m) const;
     bool intercept(double& b);
 };
 

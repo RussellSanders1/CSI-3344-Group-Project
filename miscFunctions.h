@@ -11,6 +11,8 @@ void drawCircles(vector<circle> &circles, SDL_Plotter &g);
 
 void drawMenu(SDL_Plotter &g);
 
+void drawControls(SDL_Plotter &g);
+
 void generateRandomPoints(vector<circle> &circles, SDL_Plotter &g);
 
 void printHull(vector<circle> &hull, ostream &out);
@@ -21,16 +23,15 @@ bool isStraightLine(vector<circle> &circles);
 
 void eliminateDuplicates(vector<circle> &circles);
 
-void caseBrutePair(SDL_Plotter &g);
-
-void caseBruteHull(SDL_Plotter &g);
-
-void caseDivideHull(SDL_Plotter &g);
-
 void caseRandom(bool &solutionOnScreen, vector<circle> &circles, SDL_Plotter &g);
 
 void caseImport(vector<circle> &circles, SDL_Plotter &g);
 
 void storeMouseClick(int x, int y, vector<circle> &circles, SDL_Plotter &g);
+
+void caseHull(SDL_Plotter &g, ostream &out);
+
+void casePair(SDL_Plotter &g, ostream &out);
+
 
 #endif // MISCFUNCTIONS_H_INCLUDED
