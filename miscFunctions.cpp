@@ -48,7 +48,8 @@ void drawControls(SDL_Plotter &g) {
     f.plotString(point (100, 430), 1, "PRESS F TO SET FAST MODE!", BLACK, g);
     f.plotString(point (100, 460), 1, "PRESS THE LEFT ARROW TO GO BACK A SCREEN", BLACK, g);
     f.plotString(point (100, 490), 1, "CLICK ANYWHERE IN A SOLUTION TO PLOT A POINT!", BLACK, g);
-    f.plotString(point (80, 550), 2, "PRESS ANY KEY TO CONTINUE", BLACK, g);
+    f.plotString(point (100, 520), 1, "PRESS A TO TOGGLE ANIMATION", BLACK, g);
+    f.plotString(point (80, 580), 2, "PRESS ANY KEY TO CONTINUE", BLACK, g);
 
     g.update();
 }
@@ -130,6 +131,7 @@ void casePair(SDL_Plotter &g, ostream &out) {
     vector<circle> circles;
     bool fastMode = false;
     bool solutionOnScreen = false;
+    bool animationMode = true;
     line closestPair;
     int x = 0, y = 0;
 
@@ -148,7 +150,12 @@ void casePair(SDL_Plotter &g, ostream &out) {
                             clearScreen(g);
                             drawCircles(circles, g);
                         }
-                        closestPair = dividePair(circles, 0, circles.size() - 1, g, fastMode);
+                        if (animationMode) {
+                            closestPair = dividePair(circles, 0, circles.size() - 1, g, fastMode);
+                        }
+                        else {
+                            closestPair = dividePairSimple(circles, 0, circles.size() - 1);
+                        }
                         printPair(closestPair, cout);
                         solutionOnScreen = true;
                     }
@@ -160,7 +167,12 @@ void casePair(SDL_Plotter &g, ostream &out) {
                             clearScreen(g);
                             drawCircles(circles, g);
                         }
-                        closestPair = brutePair(circles, g, fastMode);
+                        if (animationMode) {
+                            closestPair = brutePair(circles, g, fastMode);
+                        }
+                        else {
+                            closestPair = brutePairSimple(circles);
+                        }
                         printPair(closestPair, cout);
                         solutionOnScreen = true;
                     }
@@ -177,14 +189,6 @@ void casePair(SDL_Plotter &g, ostream &out) {
                     clearScreen(g);
                     break;
 
-                case 'L':
-                    for (int i = 0; i < 5; i++) {
-                        circles.push_back(circle(point(400, 400 + i * 20), RADIUS, BLACK));
-                    }
-
-                    drawCircles(circles, g);
-                    break;
-
                 case IMPORT_OPTION:
                     caseImport(circles, g);
                     out << "Importing points from 'points.txt'..." << endl;
@@ -197,8 +201,20 @@ void casePair(SDL_Plotter &g, ostream &out) {
 
                 case SLOW_OPTION:
                     fastMode = false;
-                    out << "Slow mode set!" << endl;
+                    out << "Normal speed set!" << endl;
                     break;
+
+                case ANIMATION_OPTION:
+                    if (animationMode) {
+                        cout << "Disabling animation." << endl;
+                        animationMode = false;
+                    }
+                    else {
+                        cout << "Enabling animation mode." << endl;
+                        animationMode = true;
+                    }
+                    break;
+
 
                 default: break;
             }
@@ -220,6 +236,7 @@ void caseHull(SDL_Plotter &g, ostream &out) {
     vector<circle> circles;
     bool solutionOnScreen = false;
     bool fastMode = false;
+    bool animationMode = true;
     vector<circle> hull;
     int x = 0, y = 0;
 
@@ -238,7 +255,12 @@ void caseHull(SDL_Plotter &g, ostream &out) {
                             clearScreen(g);
                             drawCircles(circles, g);
                         }
-                        hull = bruteHull(circles, g, fastMode);
+                        if (animationMode) {
+                            hull = bruteHull(circles, g, fastMode);
+                        }
+                        else {
+                            hull = bruteHullSimple(circles);
+                        }
                         printHull(hull, cout);
                         solutionOnScreen = true;
                     }
@@ -250,7 +272,12 @@ void caseHull(SDL_Plotter &g, ostream &out) {
                             clearScreen(g);
                             drawCircles(circles, g);
                         }
-                        hull = divideHull(circles, g, fastMode);
+                        if (animationMode) {
+                            hull = divideHull(circles, g, fastMode);
+                        }
+                        else {
+                            hull = divideHullSimple(circles);
+                        }
                         printHull(hull, cout);
                         solutionOnScreen = true;
                     }
@@ -267,14 +294,6 @@ void caseHull(SDL_Plotter &g, ostream &out) {
                     clearScreen(g);
                     break;
 
-                case 'L':
-                    for (int i = 0; i < 5; i++) {
-                        circles.push_back(circle(point(400, 400 + i * 20), RADIUS, BLACK));
-                    }
-
-                    drawCircles(circles, g);
-                    break;
-
                 case IMPORT_OPTION:
                     caseImport(circles, g);
                     out << "Importing points from 'points.txt'..." << endl;
@@ -287,7 +306,18 @@ void caseHull(SDL_Plotter &g, ostream &out) {
 
                 case SLOW_OPTION:
                     fastMode = false;
-                    out << "Slow mode set!" << endl;
+                    out << "Normal speed set!" << endl;
+                    break;
+
+                case ANIMATION_OPTION:
+                    if (animationMode) {
+                        cout << "Disabling animation." << endl;
+                        animationMode = false;
+                    }
+                    else {
+                        cout << "Enabling animation mode." << endl;
+                        animationMode = true;
+                    }
                     break;
 
                 default: break;

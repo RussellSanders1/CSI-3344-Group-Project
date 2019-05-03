@@ -1,6 +1,6 @@
 Write points in the format: 0 0. Do not remove this line!
 400 400
-60 60
-560 560
-580 580
-700 700
+400 420
+400 440
+400 460
+400 480

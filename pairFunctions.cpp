@@ -60,6 +60,8 @@ line brutePair(vector<circle> &circles, SDL_Plotter &g, const bool fastMode){
                     closest.setP1(circles[i].getOrigin());
                     closest.setP2(circles[j].getOrigin());
                     closest.draw(g);
+                    circle(closest.getP1(), RADIUS, SELECTED_LINE_COLOR).draw(g);
+                    circle(closest.getP2(), RADIUS, SELECTED_LINE_COLOR).draw(g);
                     g.update();
                     g.Sleep(sleepTime);
                 }
@@ -69,6 +71,8 @@ line brutePair(vector<circle> &circles, SDL_Plotter &g, const bool fastMode){
 
                 circles[j].setColor(BLACK);
                 drawCircles(circles, g);
+                circle(closest.getP1(), RADIUS, SELECTED_LINE_COLOR).draw(g);
+                circle(closest.getP2(), RADIUS, SELECTED_LINE_COLOR).draw(g);
                 g.update();
             }
         }
@@ -129,6 +133,8 @@ line stripClosestPair(vector<circle> &strip, SDL_Plotter &g, const bool fastMode
                     closest.setP2(strip[j].getOrigin());
                     closest.setColor(SELECTED_LINE_COLOR);
                     closest.draw(g);
+                    circle(closest.getP1(), RADIUS, STRIP_COLOR).draw(g);
+                    circle(closest.getP2(), RADIUS, STRIP_COLOR).draw(g);
                     g.update();
                     g.Sleep(sleepTime);
                 }
@@ -140,6 +146,9 @@ line stripClosestPair(vector<circle> &strip, SDL_Plotter &g, const bool fastMode
     leftBoundary.erase(g);
     rightBoundary.erase(g);
     drawCircles(strip, g);
+    circle(closest.getP1(), RADIUS, STRIP_COLOR).draw(g);
+    circle(closest.getP2(), RADIUS, STRIP_COLOR).draw(g);
+
 
     return closest;
 }
@@ -184,6 +193,9 @@ line dividePair(vector<circle> &circles, int begin, int end, SDL_Plotter &g, con
         circles[i].setColor(BLACK);
     }
     drawCircles(circles, g);
+    circle(left.getP1(), RADIUS, SELECTED_LINE_COLOR).draw(g);
+    circle(left.getP2(), RADIUS, SELECTED_LINE_COLOR).draw(g);
+    g.update();
     g.Sleep(sleepTime);
 
     line right = dividePair(circles, mid + 1, end, g, fastMode);
@@ -191,9 +203,12 @@ line dividePair(vector<circle> &circles, int begin, int end, SDL_Plotter &g, con
     line closest = smallestDistance(left, right);
     right.erase(g);
     left.erase(g);
+
     closest.setColor(SELECTED_LINE_COLOR);
     closest.draw(g);
     drawCircles(circles, g);
+    circle(closest.getP1(), RADIUS, SELECTED_LINE_COLOR).draw(g);
+    circle(closest.getP2(), RADIUS, SELECTED_LINE_COLOR).draw(g);
     g.Sleep(sleepTime);
 
     double dist = closest.distance();
@@ -213,10 +228,12 @@ line dividePair(vector<circle> &circles, int begin, int end, SDL_Plotter &g, con
     }
 
     drawCircles(strip, g);
+    circle(closest.getP1(), RADIUS, SELECTED_LINE_COLOR).draw(g);
+    circle(closest.getP2(), RADIUS, SELECTED_LINE_COLOR).draw(g);
     g.Sleep(sleepTime);
 
     // Get the closest pair in the strip.
-    if(strip.size() > 1){
+    if(strip.size() > 1) {
         line stripClosest = stripClosestPair(strip, g, fastMode);
 
         closest.erase(g);
@@ -229,7 +246,119 @@ line dividePair(vector<circle> &circles, int begin, int end, SDL_Plotter &g, con
     }
 
     drawCircles(circles, g);
+    circle(closest.getP1(), RADIUS, SELECTED_LINE_COLOR).draw(g);
+    circle(closest.getP2(), RADIUS, SELECTED_LINE_COLOR).draw(g);
+    g.update();
     g.Sleep(sleepTime);
 
     return closest;
 }
+
+line brutePairSimple(vector<circle> &circles) {
+    double closestDist = INT_MAX;
+    double dist = 0;
+
+    circle p1, p2;
+
+    line temp, closest;
+
+    if (circles.size() <= 1) {
+        return line(point(-1, -1), point(-1, -1));
+    }
+
+    for (int i = 0; i < circles.size(); i++) {
+
+        for (int j = 0; j < circles.size(); j++) {
+            if(i != j) {
+
+                temp.setP1(circles[i].getOrigin());
+                temp.setP2(circles[j].getOrigin());
+
+                dist = temp.distance();
+
+                if(dist < closestDist){
+                    closestDist = dist;
+                    closest.setP1(circles[i].getOrigin());
+                    closest.setP2(circles[j].getOrigin());
+                }
+            }
+        }
+    }
+
+    return closest;
+}
+
+line stripClosestPairSimple(vector<circle> &strip) {
+    if (strip.size() <= 1) {
+        return line(point (-1, -1), point(-1, -1));
+    }
+
+    double min = numeric_limits<double>::max();
+
+    sort(strip.begin(),strip.end(), compareY);
+
+    line temp, closest;
+
+    for(int i = 0; i < strip.size(); i++){
+        for(int j = i + 1; j < strip.size() && (strip[j].getOrigin().getY() - strip[i].getOrigin().getY()) < min; j++){
+            if (i != j) {
+                temp.setP1(strip[i].getOrigin());
+                temp.setP2(strip[j].getOrigin());
+                if(line(strip[i].getOrigin(), strip[j].getOrigin()).distance() < min) {
+
+                    min = line(strip[i].getOrigin(),strip[j].getOrigin()).distance();
+                    closest.setP1(strip[i].getOrigin());
+                    closest.setP2(strip[j].getOrigin());
+                }
+            }
+        }
+    }
+
+    return closest;
+}
+
+line dividePairSimple(vector<circle> &circles, int begin, int end) {
+    // Brute force at most 3 points
+    sort(circles.begin(), circles.end());
+    int size = end - begin;
+
+    if(size <= 3){
+        vector<circle> temp;
+        for (int i = begin; i <= end; i++) {
+            temp.push_back(circles[i]);
+        }
+        return brutePairSimple(temp);
+    }
+
+    int mid = (size / 2) + begin;
+    point midpoint = circles[mid].getOrigin();
+
+
+    line left = dividePairSimple(circles, begin, mid);
+
+    line right = dividePairSimple(circles, mid + 1, end);
+
+    line closest = smallestDistance(left, right);
+
+    double dist = closest.distance();
+
+    // Make strip
+    vector<circle> strip;
+    for(int i = begin; i <= end; i++) {
+        if(abs(circles[i].getOrigin().getX() - midpoint.getX()) < dist){
+            strip.push_back(circles[i]);
+        }
+    }
+
+    // Get the closest pair in the strip.
+    if(strip.size() > 1) {
+        line stripClosest = stripClosestPairSimple(strip);
+
+        // Compare closest pair in the strip with the previous closest.
+        closest = smallestDistance(closest, stripClosest);
+    }
+
+    return closest;
+}
+
+

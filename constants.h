@@ -55,6 +55,7 @@ const char BACK_OPTION = LEFT_ARROW;
 const char CONTROLS_OPTION = 'C';
 const char FAST_OPTION = 'F';
 const char SLOW_OPTION = 'S';
+const char ANIMATION_OPTION = 'A';
 
 
 #endif // CONSTANTS_H_INCLUDED
