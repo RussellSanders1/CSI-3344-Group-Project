@@ -6,9 +6,11 @@ bool compareY(const circle &a, const circle &b) {
 
 line smallestDistance(line a, line b){
     line closest;
+	// a is shorter than b
     if(a.distance() <= b.distance()){
         closest = a;
     }
+	// b is shorter than a
     else{
         closest = b;
     }
@@ -17,7 +19,7 @@ line smallestDistance(line a, line b){
 
 
 line brutePair(vector<circle> &circles, SDL_Plotter &g, const bool fastMode){
-    double closestDist = INT_MAX;
+    double closestDist = numeric_limits<double>::max();
     double dist = 0;
     int sleepTime = BRUTE_SLEEP_TIME;
     if (fastMode) {
@@ -29,11 +31,13 @@ line brutePair(vector<circle> &circles, SDL_Plotter &g, const bool fastMode){
     line temp, closest;
     closest.setColor(SELECTED_LINE_COLOR);
     temp.setColor(TEMP_LINE_COLOR);
-
+	
+	// If there are not enough points, short circuit
     if (circles.size() <= 1) {
         return line(point(-1, -1), point(-1, -1));
     }
-
+	
+	
     for (int i = 0; i < circles.size(); i++) {
         circles[i].setColor(FIRST_SELECTED_POINT_COLOR);
         circles[i].draw(g);
@@ -85,6 +89,7 @@ line brutePair(vector<circle> &circles, SDL_Plotter &g, const bool fastMode){
 }
 
 line stripClosestPair(vector<circle> &strip, SDL_Plotter &g, const bool fastMode){
+	// If there are not enough points, short circuit
     if (strip.size() <= 1) {
         return line(point (-1, -1), point(-1, -1));
     }
@@ -94,7 +99,9 @@ line stripClosestPair(vector<circle> &strip, SDL_Plotter &g, const bool fastMode
     }
 
     double min = numeric_limits<double>::max();
-
+	
+	
+	// Draw the left and right boundary of the strip
     line leftBoundary, rightBoundary;
     leftBoundary.setColor(STRIP_COLOR);
     rightBoundary.setColor(STRIP_COLOR);
@@ -115,6 +122,7 @@ line stripClosestPair(vector<circle> &strip, SDL_Plotter &g, const bool fastMode
     temp.setColor(TEMP_LINE_COLOR);
     closest.setColor(SELECTED_LINE_COLOR);
 
+	
     for(int i = 0; i < strip.size(); i++){
         for(int j = i + 1; j < strip.size() && (strip[j].getOrigin().getY() - strip[i].getOrigin().getY()) < min; j++){
             if (i != j) {
@@ -142,7 +150,8 @@ line stripClosestPair(vector<circle> &strip, SDL_Plotter &g, const bool fastMode
             }
         }
     }
-
+	
+	// Erase the strip boundary and draw closest pair in strip
     leftBoundary.erase(g);
     rightBoundary.erase(g);
     drawCircles(strip, g);
@@ -255,28 +264,32 @@ line dividePair(vector<circle> &circles, int begin, int end, SDL_Plotter &g, con
 }
 
 line brutePairSimple(vector<circle> &circles) {
-    double closestDist = INT_MAX;
+    double closestDist = numeric_limits<double>::max();
     double dist = 0;
 
     circle p1, p2;
 
     line temp, closest;
-
+	
+	// If there are not enough points, short circuit
     if (circles.size() <= 1) {
         return line(point(-1, -1), point(-1, -1));
     }
-
+	
+	// For every point, check the distance to every point 
     for (int i = 0; i < circles.size(); i++) {
 
         for (int j = 0; j < circles.size(); j++) {
+			// If the points are different 
             if(i != j) {
-
+				// Make temp line
                 temp.setP1(circles[i].getOrigin());
                 temp.setP2(circles[j].getOrigin());
-
+				// Get length of closest pair
                 dist = temp.distance();
-
+				// If temp line is shorter than closest pair
                 if(dist < closestDist){
+					// Update closest pair 
                     closestDist = dist;
                     closest.setP1(circles[i].getOrigin());
                     closest.setP2(circles[j].getOrigin());
@@ -289,23 +302,28 @@ line brutePairSimple(vector<circle> &circles) {
 }
 
 line stripClosestPairSimple(vector<circle> &strip) {
+	// If there are not enough points, short circuit
     if (strip.size() <= 1) {
         return line(point (-1, -1), point(-1, -1));
     }
-
+	
     double min = numeric_limits<double>::max();
 
     sort(strip.begin(),strip.end(), compareY);
 
     line temp, closest;
-
+	
+	// Run the brute force algorithm on the strip of points
     for(int i = 0; i < strip.size(); i++){
         for(int j = i + 1; j < strip.size() && (strip[j].getOrigin().getY() - strip[i].getOrigin().getY()) < min; j++){
+			// If the points are different
             if (i != j) {
+				// Make temp line 
                 temp.setP1(strip[i].getOrigin());
                 temp.setP2(strip[j].getOrigin());
+				// If temp line is shorter than min
                 if(line(strip[i].getOrigin(), strip[j].getOrigin()).distance() < min) {
-
+					// Line becomes new min and closest is updated
                     min = line(strip[i].getOrigin(),strip[j].getOrigin()).distance();
                     closest.setP1(strip[i].getOrigin());
                     closest.setP2(strip[j].getOrigin());
@@ -333,13 +351,16 @@ line dividePairSimple(vector<circle> &circles, int begin, int end) {
     int mid = (size / 2) + begin;
     point midpoint = circles[mid].getOrigin();
 
-
+	// Run divide and conquer algorithm on left half
     line left = dividePairSimple(circles, begin, mid);
 
+	// Run divide and conquer alogrithm on right half
     line right = dividePairSimple(circles, mid + 1, end);
-
+	
+	// Get the smaller line between left and right
     line closest = smallestDistance(left, right);
-
+	
+	// Get length of closest pair
     double dist = closest.distance();
 
     // Make strip
